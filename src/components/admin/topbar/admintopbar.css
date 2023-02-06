@@ -1,0 +1,25 @@
+.adminTopbar {
+    background-color: #6726C3;
+    color: white;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    -webkit-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none; 
+}
+
+.topbarContainer {
+    display: flex;
+    width: 100%;
+    max-width: 1024px;
+    margin: 20px 0px 10px 0px;
+    gap: 10px;
+    align-items: center;
+}
+
+.topbarList {
+    display: flex;
+    gap: 20px;
+    padding-left: 30px;
+}

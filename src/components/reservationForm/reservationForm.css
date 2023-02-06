@@ -1,0 +1,84 @@
+.reservationModal {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.modalContainer {
+    width: max-content;
+    height: max-content;
+    background-color: white;
+    padding: 20px;
+    position: relative;
+    border-radius: 10px;
+    color: #231E33;
+}
+.closeModal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    color: black;
+}
+.modalTitle {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.modalForm {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+}
+.modalFormColumn {
+    display: flex;
+    align-content: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    gap: 10px;
+    width: 180px;
+}
+.modalFormItem {
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+}
+.modalFormItem>label {
+    font-weight: 600;
+    font-size: 14px;
+}
+.modalFormItem>span {
+    font-size: 13px;
+}
+.reservationInput {
+    font-size: 13px;
+    outline: none;
+}
+.reservationSelect {
+    font-size: 13px;
+}
+.reservationTextArea {
+    font-size: 13px;
+}
+.reservationModalBtn {
+    background-color: #5009B5;
+    color: white;
+    font-weight: bold;
+    padding: 10px 5px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.reservationModalBtn:disabled {
+    background-color: #888BF1;
+    cursor: not-allowed;
+}

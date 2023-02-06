@@ -1,0 +1,68 @@
+.actionModal {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.actionModalContainer {
+    width: max-content;
+    height: max-content;
+    background-color: white;
+    padding: 20px;
+    position: relative;
+    border-radius: 10px;
+}
+.actionCloseModal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    color: black;
+}
+.actionModalTitle {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+}
+.actionModalForm {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+}
+.actionModalFormItem {
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+}
+.actionModalFormItem>span {
+    font-size: 13px;
+}
+.actionModalInput {
+    width: 250px;
+    padding: 10px;
+}
+.actionModalBtn {
+    background-color: #5009B5;
+    color: white;
+    font-weight: bold;
+    padding: 10px 5px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-transform: capitalize;
+}
+.actionModalBtn:disabled {
+    background-color: #888BF1;
+    cursor: not-allowed;
+}

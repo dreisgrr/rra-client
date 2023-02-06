@@ -1,0 +1,21 @@
+.roomListContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+.roomListFilterBarWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1024px;
+}
+.roomListResultWrapper {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1024px;
+}

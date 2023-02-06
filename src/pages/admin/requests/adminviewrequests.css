@@ -1,0 +1,16 @@
+.vrContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.vrWrapper {
+    width: 100%;
+    max-width: 1024px;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+.vrTitle {
+    font-size: 20px;
+    margin-bottom: 10px;
+}

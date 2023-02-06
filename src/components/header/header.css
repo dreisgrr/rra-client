@@ -1,0 +1,41 @@
+.header {
+    background-color: #6726C3;
+    color: white;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.header.admin {
+    background-color: white;
+    color: #231E33;
+}
+
+.headerContainer {
+    width: 100%;
+    max-width: 1024px;
+    margin: 20px 0px 10px 0px;
+
+}
+
+.headerList {
+    display: flex;
+    gap: 40px;
+}
+
+.headerListItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.headerListItem.active {
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 20px;
+}
+.headerListItem.admin.active {
+    border: 1px solid #231E33;
+    padding: 10px;
+    border-radius: 20px;
+}
+

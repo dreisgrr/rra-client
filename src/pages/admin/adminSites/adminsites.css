@@ -1,0 +1,17 @@
+.adminSitesContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.adminSitesWrapper {
+    width: 100%;
+    max-width: 1024px;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+.adminSitesTitle {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #231E33;
+}

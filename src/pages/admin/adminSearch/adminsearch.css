@@ -1,0 +1,21 @@
+.adminSearchContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+.searchBarWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.adminSearchResultContainer {
+    margin-top: 50px;
+    display: flex;
+    width: 100%;
+    max-width: 1024px;
+    flex-direction: column;
+    align-self: center;
+}

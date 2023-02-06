@@ -1,0 +1,16 @@
+.rlContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.rlWrapper {
+    width: 100%;
+    max-width: 1024px;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+.rlTitle {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
