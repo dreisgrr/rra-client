@@ -71,7 +71,12 @@ const UpdateRoomModal = ({openRoomUpdateModal, selectedRoom}) => {
         e.preventDefault();
         dispatch({type: 'SUBMIT_START'})
         try {
-            const res = await axios.put(`/rooms/${selectedRoom._id}`, room)
+            let config = {
+                headers: {
+                  'Content-Type': 'application/json',
+                }
+              }
+            const res = await axios.put(`/rooms/${selectedRoom._id}`, room, config)
             console.log(res.data)
             dispatch({type:"SUBMIT_SUCCESS", payload: res.data})
             openRoomUpdateModal(false)

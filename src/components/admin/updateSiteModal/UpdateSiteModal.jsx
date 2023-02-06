@@ -43,7 +43,12 @@ const UpdateSiteModal = ({openSiteUpdateModal, selectedSite}) => {
         console.log(site)
         dispatch({type: 'SUBMIT_START'})
         try {
-            const res = await axios.put(`/sites/${selectedSite._id}`, site)
+            let config = {
+                headers: {
+                  'Content-Type': 'application/json',
+                }
+              }
+            const res = await axios.put(`/sites/${selectedSite._id}`, site, config)
             console.log(res.data)
             dispatch({type:"SUBMIT_SUCCESS", payload: res.data})
             openSiteUpdateModal(false)

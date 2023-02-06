@@ -52,7 +52,12 @@ const ReservationForm = ({openReservationModal, selectedRoom, requestDetails, ho
         console.log(reservation)
         dispatch({type: 'SUBMIT_START'})
         try {
-            const res = await axios.post("/reservations", reservation)
+            let config = {
+                headers: {
+                  'Content-Type': 'application/json',
+                }
+              }
+            const res = await axios.post("/reservations", reservation, config)
             console.log(res.data)
             dispatch({type:"SUBMIT_SUCCESS", payload: res.data})
             openReservationModal(false)

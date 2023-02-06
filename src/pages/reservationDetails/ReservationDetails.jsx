@@ -77,7 +77,12 @@ const ReservationDetails = () => {
         }
         dispatch({type: 'SUBMIT_START'})
         try {
-            const res = await axios.put(`/reservations/${reservation._id}`, payload)
+            let config = {
+                headers: {
+                  'Content-Type': 'application/json',
+                }
+              }
+            const res = await axios.put(`/reservations/${reservation._id}`, payload, config)
             dispatch({type:"SUBMIT_SUCCESS", payload: res.data})
             setReservation(prev => ({...prev, payload }))
             console.log(reservation)
