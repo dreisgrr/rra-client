@@ -80,8 +80,9 @@ const ReservationDetails = () => {
             let config = {
                 headers: {
                   'Content-Type': 'application/json',
-                }
-              }
+                },
+                withCredentials: 'same-origin'
+            }
             const res = await axios.put(`/reservations/${reservation._id}`, payload, config)
             dispatch({type:"SUBMIT_SUCCESS", payload: res.data})
             setReservation(prev => ({...prev, payload }))

@@ -24,8 +24,9 @@ const Login = () => {
             let config = {
                 headers: {
                   'Content-Type': 'application/json',
-                }
-              }
+                },
+                withCredentials: 'same-origin'
+            }
             const res = await (await axios.post("/auth/login", credentials, config))
             console.log(res.data)
             dispatch({type:"LOGIN_SUCCESS", payload: res.data})

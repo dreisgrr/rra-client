@@ -46,8 +46,9 @@ const UpdateSiteModal = ({openSiteUpdateModal, selectedSite}) => {
             let config = {
                 headers: {
                   'Content-Type': 'application/json',
-                }
-              }
+                },
+                withCredentials: 'same-origin'
+            }
             const res = await axios.put(`/sites/${selectedSite._id}`, site, config)
             console.log(res.data)
             dispatch({type:"SUBMIT_SUCCESS", payload: res.data})

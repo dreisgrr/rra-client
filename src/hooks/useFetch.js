@@ -13,8 +13,9 @@ const useFetch = (url) => {
                 let config = {
                     headers: {
                       'Content-Type': 'application/json',
-                    }
-                  }
+                    },
+                    withCredentials: 'same-origin'
+                }
                 const res = await axios.get(url, config)
                 setData(res.data)
             } catch (error) {
