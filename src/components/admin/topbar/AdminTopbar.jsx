@@ -18,8 +18,9 @@ const AdminTopbar = ({passActive, activeIndexApp}) => {
     const navDefinition = [
         {type: 'reservations', title: 'Reservation Requests', index: 0},
         {type: 'search', title: 'Reserve Rooms', index: 1},
-        {type: 'sites', title: 'Site Management', index: 2},
-        {type: 'rooms', title: 'Room Management', index: 3},
+        {type: 'sites', title: 'Sites', index: 2},
+        {type: 'rooms', title: 'Rooms', index: 3},
+        {type: 'reports', title: 'Reports', index: 4},
     ]
 
     const handleChangeType = (index, url) => {

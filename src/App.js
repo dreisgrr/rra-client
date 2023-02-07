@@ -22,6 +22,7 @@ import NotFound from "./pages/notfound/NotFound";
 import AdminSearch from "./pages/admin/adminSearch/AdminSearch";
 import AdminSites from "./pages/admin/adminSites/AdminSites";
 import RoomList from "./pages/admin/roomList/RoomList";
+import UnderConstruction from "./pages/underConstruction/UnderConstruction";
 
 function App() {
   const location = useLocation();
@@ -53,6 +54,7 @@ function App() {
           <Route path="/search" element={user ? <AdminSearch/> : <Navigate to="/login"/>} />
           <Route path="/sites" element={user ? <AdminSites/> : <Navigate to="/login" /> } />
           <Route path="/rooms" element={user ? <RoomList/> : <Navigate to="/login" /> } />
+          <Route path="/reports" element={user ? <UnderConstruction/> : <Navigate to="/login" /> } />
           <Route path="/" element={user ? <Navigate to="/reservations" /> : <Navigate to="/login" /> } />
         </Routes>
       </> :

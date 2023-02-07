@@ -4,6 +4,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+}
+.upperSection, .lowerSection {
+    display: flex;
+}
+.loginCompanyLogo {
+    width: 300px;
 }
 .loginTitles {
     display: flex;

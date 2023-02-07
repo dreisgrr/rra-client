@@ -29,6 +29,7 @@ const Header = ({ passActive, view }) => {
                     <HeaderListItem active={activeIndex === 3} view={view} type={"sleeping"} changeType={ ()=> handleChangeType(3)}/>
                     { (user?.permissions?.isManager || user?.permissions?.isAdmin) ?  <HeaderListItem active={activeIndex === 0} view={view} type={"conference"} changeType={ ()=> handleChangeType(0)}/> : ''}
                     { (user?.permissions?.isManager || user?.permissions?.isAdmin || user?.permissions?.isWorkforce || user?.permissions?.isFacility) ?  <HeaderListItem active={activeIndex === 1} type={"training"} view={view} changeType={ ()=> handleChangeType(1)}/> : ''}
+                    <HeaderListItem active={activeIndex === 4} view={view} type={"seats"} changeType={ ()=> handleChangeType(4)}/>
                     
                     
                     {/* <div className="headerListItem">

@@ -30,7 +30,7 @@ const Navbar = () => {
         <div className="navbar" style={ user ? {display: "flex"} : {display: "none"}}>
             <div className="navContainer">
                 <div className="logoWrapper" onClick={()=> handleClick('home')} >
-                    <span className="logo">Room Reservation App</span>
+                    <span className="logo">Space Reservation App</span>
                     <span className="logoSmall">Carelon Global Solutions</span>
                 </div>
                 

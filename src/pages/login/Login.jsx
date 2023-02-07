@@ -4,6 +4,8 @@ import { AuthContext } from "../../context/AuthContext"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import requestUrl from '../../utils/requestMethods.js'
+import carelonLogo from "../../resources/carelon/carelon-logo.png"
+import carelonLogoSvg from "../../resources/carelon/carelon-logo.svg"
 
 const Login = () => {
     const [ credentials, setCredentials ] = useState({
@@ -40,28 +42,33 @@ const Login = () => {
 
     return (
         <div className="login">
-            <div className="loginTitles">
-                <span className="appName">Room Reservation App</span>
-                <span className="companyName">Carelon Global Solutions</span>
+            <div className="upperSection">
             </div>
-            <div className="loginContainer">
-                <input 
-                    type="text" 
-                    placeholder="Domain ID" 
-                    id="domainId" 
-                    className="loginInput" 
-                    style={{textTransform: 'uppercase'}}
-                    onChange={handleChange}
-                />
-                <input 
-                    type="password" 
-                    placeholder="Password" 
-                    id="password" 
-                    className="loginInput" 
-                    onChange={handleChange}
-                />
-                <button disabled={loading} className="loginButton" onClick={handleLogin}>Login</button>
-                { error && <span className="loginError">{error.message}</span>}
+            <div className="lowerSection">
+                <div className="loginTitles">
+                    <img src={carelonLogoSvg} alt="" className="loginCompanyLogo"/>
+                    <span className="appName">Space Reservation App</span>
+                    {/* <span className="companyName">Carelon Global Solutions</span> */}
+                </div>
+                <div className="loginContainer">
+                    <input 
+                        type="text" 
+                        placeholder="Domain ID" 
+                        id="domainId" 
+                        className="loginInput" 
+                        style={{textTransform: 'uppercase'}}
+                        onChange={handleChange}
+                    />
+                    <input 
+                        type="password" 
+                        placeholder="Password" 
+                        id="password" 
+                        className="loginInput" 
+                        onChange={handleChange}
+                    />
+                    <button disabled={loading} className="loginButton" onClick={handleLogin}>Login</button>
+                    { error && <span className="loginError">{error.message}</span>}
+                </div>
             </div>
         </div>
     )

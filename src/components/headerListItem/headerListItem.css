@@ -8,9 +8,18 @@
     -ms-user-select: none; 
     user-select: none; 
 }
+.headerListItem.disabled {
+    font-size: 16px;
+    cursor: not-allowed;
+    color: lightgray;
+}
 .headerListItem.admin {
     font-size: 12px;
     font-weight: bold;
+}
+.headerListItem.admin.disabled {
+    cursor: not-allowed;
+    color: gray;
 }
 
 .headerListItem.active {
