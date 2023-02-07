@@ -1,6 +1,7 @@
 import './reservationdetails.css'
 import useFetch from '../../hooks/useFetch'
 import axios from 'axios';
+import requestUrl from '../../utils/requestMethods.js'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { format } from "date-fns";
 import moment from 'moment';
@@ -83,7 +84,7 @@ const ReservationDetails = () => {
                 },
                 withCredentials: 'same-origin'
             }
-            const res = await axios.put(`/reservations/${reservation._id}`, payload, config)
+            const res = await requestUrl.put(`/reservations/${reservation._id}`, payload, config)
             dispatch({type:"SUBMIT_SUCCESS", payload: res.data})
             setReservation(prev => ({...prev, payload }))
             console.log(reservation)

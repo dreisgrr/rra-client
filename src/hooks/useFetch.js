@@ -1,5 +1,7 @@
 
 import axios from "axios"
+import requestUrl from '../utils/requestMethods.js'
+
 const { useState, useEffect } = require("react")
 const useFetch = (url) => {
     const [data, setData] = useState([])
@@ -10,13 +12,7 @@ const useFetch = (url) => {
         const fetchData = async () => {
             setLoading(true)
             try {
-                let config = {
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    withCredentials: 'same-origin'
-                }
-                const res = await axios.get(url, config)
+                const res = await requestUrl.get(url)
                 setData(res.data)
             } catch (error) {
                 setError(error)

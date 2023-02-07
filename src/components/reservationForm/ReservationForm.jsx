@@ -7,6 +7,7 @@ import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { format } from "date-fns";
 import { useContext, useState } from 'react';
 import { useNavigate } from "react-router-dom"
+import requestUrl from '../../utils/requestMethods.js'
 
 const ReservationForm = ({openReservationModal, selectedRoom, requestDetails, hoursDef}) => {
     
@@ -58,7 +59,7 @@ const ReservationForm = ({openReservationModal, selectedRoom, requestDetails, ho
                 },
                 withCredentials: 'same-origin'
             }
-            const res = await axios.post("/reservations", reservation, config)
+            const res = await requestUrl.post("/reservations", reservation, config)
             console.log(res.data)
             dispatch({type:"SUBMIT_SUCCESS", payload: res.data})
             openReservationModal(false)

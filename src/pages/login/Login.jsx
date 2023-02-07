@@ -3,6 +3,7 @@ import { useContext, useState } from "react"
 import { AuthContext } from "../../context/AuthContext"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import requestUrl from '../../utils/requestMethods.js'
 
 const Login = () => {
     const [ credentials, setCredentials ] = useState({
@@ -27,7 +28,7 @@ const Login = () => {
                 },
                 withCredentials: 'same-origin'
             }
-            const res = await (await axios.post("/auth/login", credentials, config))
+            const res = await (await requestUrl.post("/auth/login", credentials, config))
             console.log(res.data)
             dispatch({type:"LOGIN_SUCCESS", payload: res.data})
             navigate('/');

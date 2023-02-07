@@ -7,6 +7,7 @@ import _ from 'lodash'
 import axios from 'axios';
 import { useContext } from 'react';
 import { ReservationContext } from '../../../context/ReservationContext';
+import requestUrl from '../../../utils/requestMethods.js'
 
 const UpdateSiteModal = ({openSiteUpdateModal, selectedSite}) => {
     const navigate = useNavigate();
@@ -49,7 +50,7 @@ const UpdateSiteModal = ({openSiteUpdateModal, selectedSite}) => {
                 },
                 withCredentials: 'same-origin'
             }
-            const res = await axios.put(`/sites/${selectedSite._id}`, site, config)
+            const res = await requestUrl.put(`/api/sites/${selectedSite._id}`, site, config)
             console.log(res.data)
             dispatch({type:"SUBMIT_SUCCESS", payload: res.data})
             openSiteUpdateModal(false)
