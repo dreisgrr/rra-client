@@ -1,5 +1,10 @@
 .underConstructionContainer {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     margin-top: 20px;
+    align-items: center;
+}
+.underDevCat {
+    width: 400px;
 }

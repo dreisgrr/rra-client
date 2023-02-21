@@ -4,14 +4,13 @@ import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import _ from 'lodash'
-import axios from 'axios';
 import { useContext } from 'react';
 import { ReservationContext } from '../../../context/ReservationContext';
 import requestUrl from '../../../utils/requestMethods.js'
 
 const UpdateSiteModal = ({openSiteUpdateModal, selectedSite}) => {
     const navigate = useNavigate();
-    const { loading, error, dispatch } = useContext(ReservationContext);
+    const { error, dispatch } = useContext(ReservationContext);
     const [site, setSite] = useState({
         title: selectedSite.title,
         location: selectedSite.location,
@@ -45,21 +44,18 @@ const UpdateSiteModal = ({openSiteUpdateModal, selectedSite}) => {
         dispatch({type: 'SUBMIT_START'})
         try {
             let config = {
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                withCredentials: 'same-origin'
+                withCredentials: true
             }
-            const res = await requestUrl.put(`/api/sites/${selectedSite._id}`, site, config)
-            console.log(res.data)
+            const res = await requestUrl.put(`/sites/${selectedSite._id}`, site, config)
             dispatch({type:"SUBMIT_SUCCESS", payload: res.data})
             openSiteUpdateModal(false)
             navigate('/sites')
         } catch (error) {
-            dispatch({type:"SUBMIT_FAILURE", payload: error.response.data})
+            dispatch({type:"SUBMIT_FAILURE", payload: error.response?.data})
         }
         window.location.reload()
     }
+    // console.count('component-render')
 
     return (
         <div className="updateSiteModal">

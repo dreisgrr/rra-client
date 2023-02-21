@@ -1,16 +1,12 @@
 import { useState, useContext } from "react";
 import {
-  BrowserRouter,
   Routes,
   Route,
   Navigate,
   useLocation
 } from "react-router-dom"
-import Site from "./pages/site/Site";
 import SearchResultList from "./components/searchResultList/SearchResultList";
 import Navbar from "./components/navbar/Navbar"
-import Header from "./components/header/Header"
-import SearchBar from "./components/searchBar/SearchBar";
 import Login from "./pages/login/Login";
 import { AuthContext } from "./context/AuthContext";
 import Home from "./pages/home/Home";
@@ -23,27 +19,28 @@ import AdminSearch from "./pages/admin/adminSearch/AdminSearch";
 import AdminSites from "./pages/admin/adminSites/AdminSites";
 import RoomList from "./pages/admin/roomList/RoomList";
 import UnderConstruction from "./pages/underConstruction/UnderConstruction";
+import { urlDefinition } from "./utils/definitions.js"
 
 function App() {
   const location = useLocation();
   const { pathname } = location;
   const splitLocation = pathname.split("/")
   const url = splitLocation[1];
-  const urlDefinition = ['reservations', 'search', 'sites', 'rooms']
 
   const { user } = useContext(AuthContext)
   let index = urlDefinition.findIndex( item => item === url)
-  console.log(index)
   const [activeIndex, setActiveIndex] = useState(index);
+  
   const handlePassActive = (i) => {
       setActiveIndex(i)
   }
+
   return (
     <>
     
-    <Navbar/>
+    <Navbar passActive={ (i)=> handlePassActive(i)}/>
     {
-      user?.permissions.isAdmin ? 
+      user?.permissions?.isAdmin ? 
       <>
         <AdminTopbar passActive={ (i)=> handlePassActive(i)} activeIndexApp={activeIndex}/>
         <Routes>

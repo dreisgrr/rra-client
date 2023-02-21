@@ -12,7 +12,7 @@ import { AuthContext } from "../../context/AuthContext";
 const Header = ({ passActive, view }) => {
     const { user } = useContext(AuthContext);
     //const defaultActive = (user?.permissions?.isAdmin || user?.permissions?.isManager) ? 0 : user?.permissions?.isWorkforce ? 1 : 2;
-    const [activeIndex, setActiveIndex] = useState(1);
+    const [activeIndex, setActiveIndex] = useState(2);
 
     const navigate = useNavigate();
     

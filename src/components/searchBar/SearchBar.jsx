@@ -7,11 +7,20 @@ import { Calendar } from "react-date-range"
 import { format } from "date-fns";
 import { useContext } from 'react'
 import { AuthContext } from '../../context/AuthContext'
+import { FACILITY_TYPES, VIEW, DURATION_VALUES, SITE_DEFAULT_ID } from '../../utils/definitions.js'
+import { SitesContext } from '../../context/SitesContext'
 
 
 const SearchBar = ({activeIndex, view, passAction}) => {
+    const sitesCtx = useContext(SitesContext)
     const { user } = useContext(AuthContext)
-    const [site, setSite] = useState("63b56fea41184440f9f90696");
+    const [sitesCtxData, setSitesCtxData] = useState([])
+    console.log('user', user)
+    console.log('sitesCtx', sitesCtx)
+    const sitesMatch = sitesCtx?.find( (item)=> item._id===SITE_DEFAULT_ID)
+    const defaultSelectedSite = sitesMatch?._id
+    const [site, setSite] = useState(SITE_DEFAULT_ID);
+
     const [toggleDatePicker, setToggleDatePicker] = useState(false)
     const [date, setDate] = useState(
         {
@@ -78,6 +87,7 @@ const SearchBar = ({activeIndex, view, passAction}) => {
     useEffect( () => {
         setTime(today.getHours() + 1)
     }, [hours])
+
     useEffect( () => {
         if(activeIndex === 2 || activeIndex === 3) {
             setOptions( prev => {
@@ -85,6 +95,15 @@ const SearchBar = ({activeIndex, view, passAction}) => {
             })
         }
     }, [activeIndex])
+
+    useEffect(() => {
+        console.log('Search Bar UseEFfect Called')
+        console.log(sitesCtx)
+        setSitesCtxData(sitesCtx)
+        return () => {
+            setSitesCtxData([])
+        }
+    }, [sitesCtxData])
 
     const checkAvailability = (requestStart, requestEnd) => {
         let dateReqStartTime = new Date(requestStart)
@@ -103,7 +122,7 @@ const SearchBar = ({activeIndex, view, passAction}) => {
         console.log('booked start time: ', bookedStartTime)
         console.log('request end time: ', dateReqEndTime)
 
-        if((bookedStartTime.getTime() < dateReqStartTime.getTime() && (bookedEndTime.getTime() < dateReqStartTime.getTime() || bookedEndTime.getTime() === dateReqStartTime.getTime()) 
+        if(((bookedStartTime.getTime() < dateReqStartTime.getTime() && (bookedEndTime.getTime() < dateReqStartTime.getTime() || bookedEndTime.getTime() === dateReqStartTime.getTime())) 
         || (bookedStartTime.getTime() > dateReqStartTime.getTime() && (bookedStartTime.getTime() > dateReqEndTime.getTime() || bookedStartTime.getTime() === dateReqEndTime.getTime())))) {
             return true;
         }
@@ -115,26 +134,25 @@ const SearchBar = ({activeIndex, view, passAction}) => {
     const handleSearch = () => {
         let search = ''
         switch (activeIndex) {
-            case 0: search = 'conference' 
+            case 0: search = FACILITY_TYPES.CONFERENCE 
                 break;
-            case 1: search = 'training'
+            case 1: search = FACILITY_TYPES.TRAINING
                 break;
-            case 2: search = 'gym'
+            case 2: search = FACILITY_TYPES.GYM
                 break;
-            case 3: search = 'sleeping'
+            case 3: search = FACILITY_TYPES.SLEEPING_QUARTERS
                 break;
         
-            default: search = 'conference'
+            default: search = FACILITY_TYPES.CONFERENCE 
                 break;
         }
 
-        // console.log(`site : ${site}`)
-        // console.log("date", date);
-        console.log(`start time : ${time}`)
+        
+        // console.log(`start time : ${time}`)
         let requestStartTime = new Date(date.date);
         let requestEndTime = new Date(date.date);
-        console.log("date date: ", date.date)
-        console.log("requestStartTime ", requestStartTime)
+        // console.log("date date: ", date.date)
+        // console.log("requestStartTime ", requestStartTime)
         let endTime = Number(time) + Number(duration);
         let computedStartTime = Number(time) === 24 ? 0 : time
         
@@ -147,24 +165,24 @@ const SearchBar = ({activeIndex, view, passAction}) => {
         requestEndTime.setSeconds(0);
         requestEndTime.setHours(endTime);
 
-        console.log("request start: ", requestStartTime)
-        console.log("request start millis: ", requestStartTime.getTime())
-        console.log("request end", requestEndTime)
-        console.log("request end millis", requestEndTime.getTime())
+        // console.log("request start: ", requestStartTime)
+        // console.log("request start millis: ", requestStartTime.getTime())
+        // console.log("request end", requestEndTime)
+        // console.log("request end millis", requestEndTime.getTime())
         
         requestStartTime = requestStartTime.getTime();
         requestEndTime = requestEndTime.getTime()
         
         //let isAvailable = checkAvailability(requestStartTime, requestEndTime)
         //console.log("isAvailable", isAvailable);
-        console.log(`site : ${site}`)
-        console.log(`date : ${date.date}`)
-        console.log(`time : ${computedStartTime}`)
-        console.log(`requestStartTime : ${requestStartTime}`)
-        console.log(`requestEndTime : ${requestEndTime}`)
-        console.log("options", options);
-        console.log(`duration : ${duration}`)
-        console.log(`search : ${search}`)
+        // console.log(`site : ${site}`)
+        // console.log(`date : ${date.date}`)
+        // console.log(`time : ${computedStartTime}`)
+        // console.log(`requestStartTime : ${requestStartTime}`)
+        // console.log(`requestEndTime : ${requestEndTime}`)
+        // console.log("options", options);
+        // console.log(`duration : ${duration}`)
+        // console.log(`search : ${search}`)
         
         if (user?.permissions.isAdmin) {
             passAction('loadSearchResult', {state:{ site, date, computedStartTime, requestStartTime, requestEndTime, options, duration, search}})
@@ -175,15 +193,18 @@ const SearchBar = ({activeIndex, view, passAction}) => {
     }
 
     return (
-        <div className={view === 'admin' ? "searchBarContainer admin" : "searchBarContainer"}>
-        <div className={view === 'admin' ? "headerSearch admin" : "headerSearch"}> 
+        <div className={view === VIEW.ADMIN ? "searchBarContainer admin" : "searchBarContainer"}>
+        <div className={view === VIEW.ADMIN ? "headerSearch admin" : "headerSearch"}> 
             <div className="headerSearchItem">
                 <FontAwesomeIcon icon={ faLocationDot } className="headerIcon" />
                 <select className="headerSearchSelect" id="selectSite" onChange={(e) => setSite(e.target.value) }>
-                    <option defaultValue="true" className="headerSearchOptions" value="63b56fea41184440f9f90696">AGT</option>
-                    <option className="headerSearchOptions" value="63b56f2241184440f9f90694">GLAS</option>
-                    <option className="headerSearchOptions" value="63b570b7b9b00d78455bf72d">OFT</option>
-                    <option className="headerSearchOptions" value="63b570f8b9b00d78455bf72f">SMS</option>
+                    {
+                        sitesCtxData && sitesCtxData.map( (item) => 
+                            (
+                            <option key={item._id} className="headerSearchOptions" value={item._id} selected={defaultSelectedSite === item._id ? true : false}>{item.title}</option>
+                            // <option key={item._id} className="headerSearchOptions" value={item._id}>{item.title}</option>
+                        ))
+                    }
                 </select>
             </div>
             <div className="headerSearchItem">
@@ -203,7 +224,7 @@ const SearchBar = ({activeIndex, view, passAction}) => {
                         minDate={new Date()}
                         onChange={(e) => handleSelect("date", e )}
                         editableDateInputs={true}
-                        className='dateRange'
+                        className={view === VIEW.ADMIN ? "dateRange admin" : "dateRange"}
                     />
                 }
             </div>
@@ -214,12 +235,13 @@ const SearchBar = ({activeIndex, view, passAction}) => {
                     id="selectFromTime" 
                     onLoadedData={(e) => setTime(e.target.value)} 
                     onChange={(e) => setTime(e.target.value) }
-                    defaultValue={ hours[(today.getHours() + 1)]}
+                    // value={ hours[(today.getHours() + 1)]}
                     >
                     {
                         hours ? 
                             hours.map((item, i) => (
                                 <option key={i} value={i} selected={ (today.getHours() + 1) === i} >{item}</option>
+                                //<option key={i} value={i} >{item}</option>
                             )
                             )
                     : ''}
@@ -227,11 +249,12 @@ const SearchBar = ({activeIndex, view, passAction}) => {
             </div>
             <div className="headerSearchItem">
                 <label>Duration</label>
-                <select className="headerSearchSelect" defaultValue="1" id="selectDuration" onChange={(e) => setDuration(e.target.value)}> 
-                                <option value="1">1 hr</option>
-                                <option value="2">2 hrs</option>
-                                <option value="3">3 hrs</option>
-                                <option value="4">4 hrs</option>
+                <select className="headerSearchSelect" id="selectDuration" onChange={(e) => setDuration(e.target.value)}> 
+                                {
+                                    DURATION_VALUES.map( (item, i) => (
+                                        <option value={item} key={i}>{item} {Number(item) > 1 ? 'hours' : 'hour'}</option>
+                                    )) 
+                                }
                 </select>
             </div>
             <div className="headerSearchItem">

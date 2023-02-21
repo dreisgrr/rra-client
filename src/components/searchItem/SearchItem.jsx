@@ -3,8 +3,11 @@ import conferenceStockPhoto from "../../resources/AGT/images/conference-room-sto
 import trainingStockPhoto from "../../resources/AGT/images/training-room-stock-photo.jpg"
 import gymStockPhoto from "../../resources/AGT/images/gym-stock-photo.jpg"
 import sleepingStockPhoto from "../../resources/AGT/images/sleeping-quarters-stock-photo2.jpg"
+import { useContext } from "react"
+import { AuthContext } from "../../context/AuthContext"
 
 const SearchItem = ({room, handleReserve}) => {
+    const { user } = useContext(AuthContext);
     return (
         <div className="searchItem">
             <img
@@ -29,7 +32,7 @@ const SearchItem = ({room, handleReserve}) => {
                 <label>Capacity: {room.capacity}</label>
             </div>
             <div className="searchItemDetails">
-                <button className="searchItemReserveBtn" onClick={ ()=>handleReserve(room)}>Reserve</button>
+                <button className="searchItemReserveBtn" disabled={room.isRestricted && !user.permissions.isAdmin ? true : false} onClick={ ()=>handleReserve(room)}>Reserve</button>
             </div>
         </div>
     )

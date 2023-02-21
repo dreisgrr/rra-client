@@ -6,7 +6,7 @@ import ReservationsListItem from "../../components/reservationsListItem/Reservat
 
 const ReservationsList = () => {
     const { user } = useContext(AuthContext)
-    const { data, loading, error } = useFetch(`/reservations?domainId=${user.domainId}`)
+    const { data, loading, error } = useFetch(`/reservations?domainId=${user.domainId}&id=${user._id}`)
     return (
         <div className="rlContainer">
             <div className="rlWrapper">
@@ -24,7 +24,7 @@ const ReservationsList = () => {
                                             "No Reservations" :
                                                 <>
                                                     {data.map( (item) => (
-                                                        <ReservationsListItem key={item._id} item={item}/>
+                                                        <ReservationsListItem key={item._id} reservationInfo={item}/>
                                                     ))}
                                                 </> 
                     }

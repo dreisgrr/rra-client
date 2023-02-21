@@ -1,28 +1,19 @@
 import './admintopbar.css'
 import AdminTopbarItem from '../topbarItems/AdminTopbarItem'
 import { useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faGripLinesVertical } from "@fortawesome/free-solid-svg-icons"
+import { useNavigate } from 'react-router-dom'
+import { navDefinition } from "../../../utils/definitions.js"
 
 const AdminTopbar = ({passActive, activeIndexApp}) => {
-    const location = useLocation();
-    const { pathname } = location;
-    const splitLocation = pathname.split("/")
-    const url = splitLocation[1];
-    const urlDefinition = ['reservations', 'search', 'sites', 'rooms']
-    let index = urlDefinition.findIndex( item => item === url)
+    // const location = useLocation();
+    // const { pathname } = location;
+    // const splitLocation = pathname.split("/")
+    // const url = splitLocation[1];
+    // const urlDefinition = ['reservations', 'search', 'sites', 'rooms']
+    // let index = urlDefinition.findIndex( item => item === url)
     const navigate = useNavigate();
     const [activeIndex, setActiveIndex] = useState(activeIndexApp)
-
-    const navDefinition = [
-        {type: 'reservations', title: 'Reservation Requests', index: 0},
-        {type: 'search', title: 'Reserve Rooms', index: 1},
-        {type: 'sites', title: 'Sites', index: 2},
-        {type: 'rooms', title: 'Rooms', index: 3},
-        {type: 'reports', title: 'Reports', index: 4},
-    ]
-
+    // console.log('adminTopbar', activeIndex)
     const handleChangeType = (index, url) => {
         setActiveIndex(index)
         passActive(index);
@@ -37,7 +28,7 @@ const AdminTopbar = ({passActive, activeIndexApp}) => {
                     {
                         navDefinition.map( (item) => 
                             (
-                                <AdminTopbarItem title={item.title} type={item.type} active={activeIndex === item.index} changeType={ ()=> handleChangeType(item.index, item.type)}/>
+                                <AdminTopbarItem key={item.index} title={item.title} type={item.type} active={activeIndex === item.index} changeType={ ()=> handleChangeType(item.index, item.type)}/>
                             )
                         )
                     }

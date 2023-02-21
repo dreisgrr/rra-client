@@ -52,3 +52,7 @@
     cursor: pointer;
     border-radius: 5px;
 }
+.searchItemReserveBtn:disabled {
+    background-color: #888BF1;
+    cursor: not-allowed;
+}

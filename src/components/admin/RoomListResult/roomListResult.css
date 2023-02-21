@@ -1,7 +1,6 @@
 .rlrContainer {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
 }
 .rlrWrapper {
     width: 100%;

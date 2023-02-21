@@ -1,11 +1,10 @@
 import "./login.css"
 import { useContext, useState } from "react"
 import { AuthContext } from "../../context/AuthContext"
-import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import requestUrl from '../../utils/requestMethods.js'
-import carelonLogo from "../../resources/carelon/carelon-logo.png"
-import carelonLogoSvg from "../../resources/carelon/carelon-logo.svg"
+import carelonLogoSvg from "../../resources/carelon/carelon-logo-colored.svg"
+import { ACTION_TYPES, DEFAULT_NAMES } from "../../utils/definitions.js"
 
 const Login = () => {
     const [ credentials, setCredentials ] = useState({
@@ -22,21 +21,23 @@ const Login = () => {
 
     const handleLogin = async e => {
         e.preventDefault();
-        dispatch({type:"LOGIN_START"});
+        dispatch({type:ACTION_TYPES.START});
         try {
             let config = {
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                withCredentials: 'same-origin'
+                withCredentials: true
             }
-            const res = await (await requestUrl.post("/auth/login", credentials, config))
-            console.log(res.data)
-            dispatch({type:"LOGIN_SUCCESS", payload: res.data})
+            const res = await requestUrl.post("/auth/login", credentials, config)
+            const userId = res.data._id
+            dispatch({ type:ACTION_TYPES.SUCCESS, payload: res.data })
             navigate('/');
+            //TODO: LOG INSTANCE
         } catch (error) {
-            console.log(error)
-            dispatch({type:"LOGIN_FAILURE", payload: error.response.data})
+            if (error.response?.data !== undefined) 
+                dispatch({type:ACTION_TYPES.FAILURE, payload: error.response?.data})
+                //TODO: LOG INSTANCE
+            else 
+                dispatch({type:ACTION_TYPES.FAILURE, payload: error})
+                //TODO: LOG INSTANCE
         }
     }
 
@@ -47,17 +48,16 @@ const Login = () => {
             <div className="lowerSection">
                 <div className="loginTitles">
                     <img src={carelonLogoSvg} alt="" className="loginCompanyLogo"/>
-                    <span className="appName">Space Reservation App</span>
-                    {/* <span className="companyName">Carelon Global Solutions</span> */}
+                    <span className="appName">{DEFAULT_NAMES.APP_NAME}</span>
                 </div>
                 <div className="loginContainer">
                     <input 
                         type="text" 
                         placeholder="Domain ID" 
                         id="domainId" 
-                        className="loginInput" 
-                        style={{textTransform: 'uppercase'}}
+                        className="loginInput domainId" 
                         onChange={handleChange}
+                        maxLength="7"
                     />
                     <input 
                         type="password" 

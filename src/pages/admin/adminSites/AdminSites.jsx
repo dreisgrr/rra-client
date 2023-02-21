@@ -3,6 +3,7 @@ import useFetch from '../../../hooks/useFetch'
 import AdminSitesItem from '../../../components/admin/adminSitesItem/AdminSitesItem'
 import { useState } from 'react'
 import UpdateSiteModal from '../../../components/admin/updateSiteModal/UpdateSiteModal'
+import { DEFAULT_NAMES, ERROR_MESSAGE } from '../../../utils/definitions.js'
 
 const AdminSites = () => {
     const [openSiteUpdateModal, setOpenSiteUpdateModal] = useState(false)
@@ -16,18 +17,18 @@ const AdminSites = () => {
     return (
         <div className="adminSitesContainer">
             <div className="adminSitesWrapper">
-                <h4 className="adminSitesTitle">Carelon Global Solution Sites</h4>
+                <h4 className="adminSitesTitle">{DEFAULT_NAMES.CARELON_SITES}</h4>
                 <div className="adminSitesList">
                     {
                         loading ? 
-                            "Loading..." :
+                            <span>{ DEFAULT_NAMES.LOADING_MESSAGE }</span> :
                                 error ?
                                     <>
                                         <span>{error.message}</span><br/>
-                                        <span>Contact System Administrator</span>
+                                        <span>{ERROR_MESSAGE.CONTACT}</span>
                                     </> :
                                         (Object.keys(data).length === 0) ?
-                                            "No Sites" :
+                                            DEFAULT_NAMES.NO_SITES :
                                                 <>
                                                     {data.map( (item) => (
                                                         <AdminSitesItem key={item._id} item={item} handleUpdate={handleUpdate}/>

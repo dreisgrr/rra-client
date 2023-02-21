@@ -1,4 +1,5 @@
 import { createContext, useReducer, useEffect } from 'react'
+import { ACTION_TYPES } from '../utils/definitions.js'
 
 const INITIAL_STATE = {
     user: JSON.parse(localStorage.getItem('user')) || null,
@@ -10,25 +11,25 @@ export const AuthContext = createContext(INITIAL_STATE);
 
 const AuthReducer = (state, action) => {
     switch (action.type) {
-        case "LOGIN_START":
+        case ACTION_TYPES.START:
             return {
                 user: null,
                 loading: true,
                 error: null,
             };
-        case "LOGIN_SUCCESS":
+        case ACTION_TYPES.SUCCESS:
             return {
                 user: action.payload,
                 loading: false,
                 error: null,
             };
-        case "LOGIN_FAILURE":
+        case ACTION_TYPES.FAILURE:
             return {
                 user: null,
                 loading: false,
                 error: action.payload,
             };
-        case "LOGOUT":
+        case ACTION_TYPES.LOGOUT:
             return {
                 user: null,
                 loading: false,

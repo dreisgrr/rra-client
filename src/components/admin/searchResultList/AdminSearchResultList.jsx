@@ -54,7 +54,7 @@ const AdminSearchResultList = ({searchQuery}) => {
     return (
         <div className="asrListContainer">
             <div className="asrListWrapper">
-                <h4 className="asrListTitle">Search Result</h4>
+            <h4 className="asrListTitle">Search Result ({data.length})</h4>
                 <div className="asrList">
                     { 
                         loading ? 

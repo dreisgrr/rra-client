@@ -1,5 +1,4 @@
 
-import axios from "axios"
 import requestUrl from '../utils/requestMethods.js'
 
 const { useState, useEffect } = require("react")
@@ -12,7 +11,10 @@ const useFetch = (url) => {
         const fetchData = async () => {
             setLoading(true)
             try {
-                const res = await requestUrl.get(url)
+                let config = {
+                    withCredentials: true
+                }
+                const res = await requestUrl.get(url, config)
                 setData(res.data)
             } catch (error) {
                 setError(error)

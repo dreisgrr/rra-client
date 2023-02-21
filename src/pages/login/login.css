@@ -39,6 +39,9 @@
     padding: 10px;
     border: none;
 }
+.loginInput.domainId {
+    text-transform: uppercase;
+}
 .loginButton {
     border: none;
     padding: 10px 20px;

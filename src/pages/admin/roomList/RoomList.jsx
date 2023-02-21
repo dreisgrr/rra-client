@@ -8,7 +8,7 @@ const RoomList = () => {
     const [urlCall, setUrlCall] = useState('/rooms')
 
     const handlePassFilter = (filter) => {
-        console.log('filter', filter)
+        // console.log('filter', filter)
         setSearchQuery(filter)
         setUrlCall(`rooms?siteId=${filter?.state?.filterSite}&facilityType=${filter?.state?.filterType}`)
     }

@@ -6,8 +6,11 @@ import SearchItem from "../searchItem/SearchItem";
 import { Calendar } from "react-date-range"
 import useFetch from "../../hooks/useFetch";
 import ReservationForm from "../reservationForm/ReservationForm";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const SearchResultList = () => {
+    const { user } = useContext(AuthContext)
     const location = useLocation();
     const navigate = useNavigate();
     const [site, setSite] = useState(location.state.site)
@@ -18,7 +21,7 @@ const SearchResultList = () => {
     const [duration, setDuration] = useState(location.state.duration);
     const [options, setOptions] = useState(location.state.options)
     const [searchType, setSearchType] = useState(location.state.search)
-    console.log(location.state)
+    // console.count(location.state)
     const today = new Date()
     
     const [hours, setHours] = useState([]);
@@ -79,8 +82,8 @@ const SearchResultList = () => {
             return () => window.removeEventListener('load', onPageLoad);
         }
     }, [])
-    console.log(`/rooms/getavailable?siteId=${site}&facilityType=${searchType}&capacity=${options.pax}&requestStart=${requestStartTime}&requestEnd=${requestEndTime}`)
-    const { data, loading, error } = useFetch(`/rooms/getavailable?siteId=${site}&facilityType=${searchType}&capacity=${options.pax}&requestStart=${requestStartTime}&requestEnd=${requestEndTime}`);
+    // console.log(`/rooms/getavailable?siteId=${site}&facilityType=${searchType}&capacity=${options.pax}&requestStart=${requestStartTime}&requestEnd=${requestEndTime}&id=${user._id}`)
+    const { data, loading, error } = useFetch(`/rooms/getavailable?siteId=${site}&facilityType=${searchType}&capacity=${options.pax}&requestStart=${requestStartTime}&requestEnd=${requestEndTime}&id=${user._id}`);
     console.log('error', error)
     const goHome = (e) => {
         e.preventDefault()
@@ -91,7 +94,7 @@ const SearchResultList = () => {
             <div className="searchResultListContainer">
                 <div className="searchResultListWrapper">
                     <div className="listSearch">
-                        <h1 className="listTitle">Search Result</h1>
+                        <h1 className="listTitle">Search Result ({data.length})</h1>
                         <div className="listItem">
                             <label>Site</label>
                             <span>{site === '63b56fea41184440f9f90696' ? 'AGT' : site === '63b56f2241184440f9f90694' ? 'GLAS' : site === '63b570b7b9b00d78455bf72d' ? 'OFT' : 'SMS'}</span>

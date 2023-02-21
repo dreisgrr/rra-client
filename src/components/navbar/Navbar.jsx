@@ -4,7 +4,7 @@ import { AuthContext } from "../../context/AuthContext"
 import { useNavigate } from "react-router-dom"
 import { faWindowRestore } from "@fortawesome/free-solid-svg-icons"
 
-const Navbar = () => {
+const Navbar = ({passActive}) => {
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
 
@@ -15,11 +15,15 @@ const Navbar = () => {
             window.location.reload();
         }
         if (!user?.permissions.isAdmin) {
-            if (path === 'home') navigate('/')
+            if (path === 'home') {
+                navigate('/')
+            } 
             else if (path === 'reservations') navigate('/reservations')
         }
         else {
+            passActive(0);
             navigate('/reservations')
+            window.location.reload();
         }
         
         

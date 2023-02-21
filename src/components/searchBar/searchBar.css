@@ -75,6 +75,9 @@
 }
 .dateRange {
     position: absolute;
+    top: 80px;
+}
+.dateRange.admin {
     top: 50px;
 }
 

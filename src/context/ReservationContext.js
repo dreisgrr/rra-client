@@ -1,4 +1,5 @@
 import { createContext, useReducer } from 'react'
+import { ACTION_TYPES } from '../utils/definitions.js'
 
 const INITIAL_STATE = {
     reservation: null,
@@ -10,19 +11,19 @@ export const ReservationContext = createContext(INITIAL_STATE);
 
 const ReservationReducer = (state, action) => {
     switch (action.type) {
-        case "SUBMIT_START":
+        case ACTION_TYPES.START:
             return {
                 reservation: null,
                 loading: true,
                 error: null,
             };
-        case "SUBMIT_SUCCESS":
+        case ACTION_TYPES.SUCCESS:
             return {
                 reservation: action.payload,
                 loading: false,
                 error: null,
             };
-        case "SUBMIT_FAILURE":
+        case ACTION_TYPES.FAILURE:
             return {
                 reservation: null,
                 loading: false,

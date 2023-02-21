@@ -1,9 +1,11 @@
 import './underConstruction.css'
+import codingCat from '../../resources/misc/under-dev.gif'
 
 const UnderConstruction = () => {
     return (
         <div className="underConstructionContainer">
-            This page is under development.
+            <img src={codingCat} className="underDevCat"/>
+            <span>This page is under development.</span>
         </div>
     )
 }

@@ -2,6 +2,7 @@ import './adminviewrequests.css'
 import useFetch from '../../../hooks/useFetch'
 import ReservationsListItem from '../../../components/reservationsListItem/ReservationsListItem'
 
+
 const AdminViewRequests = () => {
     const { data, loading, error } = useFetch(`/reservations?isAdmin=true&reservationStatus=ALL`)
     return (
@@ -21,7 +22,7 @@ const AdminViewRequests = () => {
                                             "No Reservations" :
                                                 <>
                                                     {data.map( (item) => (
-                                                        <ReservationsListItem key={item._id} item={item}/>
+                                                        <ReservationsListItem key={item._id} reservationInfo={item}/>
                                                     ))}
                                                 </> 
                     }
