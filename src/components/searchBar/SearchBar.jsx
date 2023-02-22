@@ -16,7 +16,6 @@ const SearchBar = ({activeIndex, view, passAction}) => {
     const { user } = useContext(AuthContext)
     const [sitesCtxData, setSitesCtxData] = useState([])
     console.log('user', user)
-    console.log('sitesCtx', sitesCtx)
     const sitesMatch = sitesCtx?.find( (item)=> item._id===SITE_DEFAULT_ID)
     const defaultSelectedSite = sitesMatch?._id
     const [site, setSite] = useState(SITE_DEFAULT_ID);
@@ -95,15 +94,6 @@ const SearchBar = ({activeIndex, view, passAction}) => {
             })
         }
     }, [activeIndex])
-
-    useEffect(() => {
-        console.log('Search Bar UseEFfect Called')
-        console.log(sitesCtx)
-        setSitesCtxData(sitesCtx)
-        return () => {
-            setSitesCtxData([])
-        }
-    }, [sitesCtxData])
 
     const checkAvailability = (requestStart, requestEnd) => {
         let dateReqStartTime = new Date(requestStart)
@@ -199,7 +189,7 @@ const SearchBar = ({activeIndex, view, passAction}) => {
                 <FontAwesomeIcon icon={ faLocationDot } className="headerIcon" />
                 <select className="headerSearchSelect" id="selectSite" onChange={(e) => setSite(e.target.value) }>
                     {
-                        sitesCtxData && sitesCtxData.map( (item) => 
+                        sitesCtx && sitesCtx.map( (item) => 
                             (
                             <option key={item._id} className="headerSearchOptions" value={item._id} selected={defaultSelectedSite === item._id ? true : false}>{item.title}</option>
                             // <option key={item._id} className="headerSearchOptions" value={item._id}>{item.title}</option>

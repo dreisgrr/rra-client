@@ -59,7 +59,7 @@ const ReservationForm = ({openReservationModal, selectedRoom, requestDetails, ho
                 },
                 withCredentials: 'same-origin'
             }
-            const res = await requestUrl.post("/reservations", reservation, config)
+            const res = await requestUrl.post(`/reservations?id=${user._id}`, reservation, config)
             console.log(res.data)
             dispatch({type:"SUBMIT_SUCCESS", payload: res.data})
             openReservationModal(false)

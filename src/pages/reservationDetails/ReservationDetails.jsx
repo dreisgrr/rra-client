@@ -65,15 +65,15 @@ const ReservationDetails = () => {
     };
     dispatch({ type: ACTION_TYPES.START });
     try {
-      // let config = {
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //     },
-      //     withCredentials: 'same-origin'
-      // }
+      let config = {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          withCredentials: 'same-origin'
+      }
       const res = await requestUrl.put(
-        `/reservations/${reservation._id}`,
-        payload
+        `/reservations/${reservation._id}?id=${user._id}`,
+        payload, config
       );
       dispatch({ type: ACTION_TYPES.SUCCESS, payload: res.data });
       setReservation((prev) => ({ ...prev, payload }));

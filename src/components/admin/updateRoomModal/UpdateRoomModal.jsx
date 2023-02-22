@@ -78,7 +78,7 @@ const UpdateRoomModal = ({openRoomUpdateModal, selectedRoom}) => {
                 },
                 withCredentials: 'same-origin'
             }
-            const res = await requestUrl.put(`/api/rooms/${selectedRoom._id}`, room, config)
+            const res = await requestUrl.put(`/rooms/${selectedRoom._id}`, room, config)
             console.log(res.data)
             dispatch({type:"SUBMIT_SUCCESS", payload: res.data})
             openRoomUpdateModal(false)
