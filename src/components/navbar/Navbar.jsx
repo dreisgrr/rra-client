@@ -2,7 +2,7 @@ import "./navbar.css"
 import { useContext } from "react"
 import { AuthContext } from "../../context/AuthContext"
 import { useNavigate } from "react-router-dom"
-import { faWindowRestore } from "@fortawesome/free-solid-svg-icons"
+import carelonLogoSvg from "../../resources/carelon/carelon-logo-vertical.png"
 
 const Navbar = ({passActive}) => {
     const navigate = useNavigate();
@@ -34,8 +34,9 @@ const Navbar = ({passActive}) => {
         <div className="navbar" style={ user ? {display: "flex"} : {display: "none"}}>
             <div className="navContainer">
                 <div className="logoWrapper" onClick={()=> handleClick('home')} >
+                    <img src={carelonLogoSvg} alt="" className="navCompanyLogo"/>
                     <span className="logo">Space Reservation App</span>
-                    <span className="logoSmall">Carelon Global Solutions</span>
+                    {/* <span className="logoSmall">Carelon Global Solutions</span> */}
                 </div>
                 
                 <div className="navItems">

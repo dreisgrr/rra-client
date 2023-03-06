@@ -15,12 +15,14 @@
 }
 .logoWrapper {
     display: flex;
-    flex-direction: column;
     cursor: pointer;
     padding-top: 5px;
     -webkit-user-select: none; 
     -ms-user-select: none; 
     user-select: none; 
+}
+.navCompanyLogo {
+    width: 40px;
 }
 .logoSmall {
     font-size: 11px;
@@ -41,6 +43,8 @@
 
 .logo {
     font-weight: 800;
+    margin-left: 12px;
+    padding-top: 12px;
 }
 
 .navButton {

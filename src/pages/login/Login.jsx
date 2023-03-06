@@ -44,12 +44,13 @@ const Login = () => {
     return (
         <div className="login">
             <div className="upperSection">
-            </div>
-            <div className="lowerSection">
                 <div className="loginTitles">
                     <img src={carelonLogoSvg} alt="" className="loginCompanyLogo"/>
                     <span className="appName">{DEFAULT_NAMES.APP_NAME}</span>
                 </div>
+            </div>
+            <div className="lowerSection">
+                
                 <div className="loginContainer">
                     <input 
                         type="text" 
